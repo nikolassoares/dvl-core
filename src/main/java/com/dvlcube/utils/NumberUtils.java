@@ -2,6 +2,9 @@ package com.dvlcube.utils;
 
 import com.dvlcube.utils.ex.Range;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * 
  * @since 04/07/2013
@@ -24,6 +27,10 @@ public class NumberUtils {
 	public static double map(double n, Range<Double> originalRange, Range<Double> newRange) {
 		double newNumber = (n - originalRange.getStart()) / (originalRange.getEnd() - originalRange.getStart())
 				* (newRange.getEnd() - newRange.getStart()) + newRange.getStart();
-		return newNumber;
+		return round2(newNumber);
+	}
+
+	public static Double round2(Double val) {
+		return new BigDecimal(val.toString()).setScale(2, RoundingMode.HALF_UP).doubleValue();
 	}
 }
